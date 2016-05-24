@@ -1,0 +1,9 @@
+
+name: chicagofed2016
+
+dependencies:
+  - python=3.5
+  - anaconda
+  - matplotlib
+  - pip:
+    - quantecon
