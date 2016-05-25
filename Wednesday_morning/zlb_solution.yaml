@@ -1,0 +1,57 @@
+name: Zero Lower Bound
+model_type: dtcscc
+
+symbols:
+  states: [u,g]
+  controls: [pi,y,i]
+  # expectations: [E_pi, E_y]
+  shocks: [epsilon_u, epsilon_g]
+  parameters: [beta, lam, phi, rho_u, rho_g, sigma_u, sigma_g, rstar, c_pi, c_y]   # add rstar option
+# should fail when parameter no defined
+
+
+equations:
+
+  transition:
+    - u = rho_u*u(-1) + epsilon_u
+    - g = rho_g*g(-1) + epsilon_g
+
+  arbitrage:
+    - pi = beta*pi(1) + lam*y + u
+    - y = y(1) - phi*(i - pi(1)) + g
+    - i - (c_pi*pi + c_y*y )                 |   -rstar<=i<=inf
+
+calibration:
+  u: 0
+  g: 0
+  pi: 0
+  i: 0
+  y: 0
+  epsilon_u: 0
+  epsilon_g: 0
+
+  rstar: 1/beta-1
+  beta: 0.9913
+  alpha: 0.007
+  lam: 0.057
+  phi: 1.00
+  rho_u: 0.36
+  rho_g: 0.8
+  sigma_u: 0.00171
+  sigma_g: 0.00294
+  c_pi: 1.5
+  c_y: 0.5
+  
+
+options:
+  distribution: !Normal
+    sigma: [
+      [sigma_u^2, 0],
+      [0, sigma_g^2]
+    ]
+  grid: !Cartesian
+    a: [-1.5*sigma_u/(1-rho_u^2)^0.5, -1.5*sigma_g/(1-rho_g^2)^0.5]
+    b: [ 1.5*sigma_u/(1-rho_u^2)^0.5,  1.5*sigma_g/(1-rho_g^2)^0.5]
+    orders: [20,20]
+
+# cost function: \sum_t \beta^t pi& 2+ alpha y^2
