@@ -13,6 +13,9 @@ dependencies:
   - xlrd
   - numba
   - pandas-datareader
+  - numpy
+  - sympy
+  - pyyaml
   - pip:
     - quantecon
     - interpolation
