@@ -16,6 +16,9 @@ dependencies:
   - numpy
   - sympy
   - pyyaml
+  - lxml
+  - requests
+  - scipy
   - pip:
     - quantecon
     - interpolation
