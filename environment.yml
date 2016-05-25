@@ -12,6 +12,7 @@ dependencies:
   - ruamel.yaml=0.11.11
   - xlrd
   - numba
+  - pandas-datareader
   - pip:
     - quantecon
     - interpolation
