@@ -10,6 +10,7 @@ dependencies:
   - matplotlib
   - pandas=0.18.1
   - ruamel.yaml=0.11.11
+  - xlrd
   - pip:
     - quantecon
     - interpolation
