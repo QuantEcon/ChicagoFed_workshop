@@ -19,6 +19,7 @@ dependencies:
   - lxml
   - requests
   - scipy
+  - html5lib
   - pip:
     - quantecon
     - interpolation
